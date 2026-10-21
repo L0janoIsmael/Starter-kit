@@ -5,6 +5,13 @@
   "parts": [
     { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 9.6, "left": 4.84, "attrs": {} },
     {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": -150,
+      "left": -5,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    {
       "type": "wokwi-led",
       "id": "led1",
       "top": 30.4,
@@ -85,30 +92,42 @@
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
     [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "oled1:GND", "esp:GND.1", "black", [] ],
+    [ "oled1:VCC", "esp:3V3", "red", [] ],
+    [ "oled1:SCL", "esp:22", "orange", [] ],
+    [ "oled1:SDA", "esp:21", "blue", [] ],
+
     [ "relay2:IN", "esp:18", "green", [ "h0" ] ],
     [ "relay1:IN", "esp:19", "green", [ "h-48", "v95.8" ] ],
-    [ "esp:22", "relay4:IN", "green", [ "h-0.52", "v175.8" ] ],
-    [ "esp:21", "relay3:IN", "green", [ "h-163.72", "v127.6" ] ],
+    [ "esp:23", "relay4:IN", "green", [] ],
+    [ "esp:4", "relay3:IN", "green", [] ],
+
     [ "relay3:VCC", "esp:5V", "red", [ "h0" ] ],
     [ "relay2:VCC", "esp:5V", "red", [ "h44.8", "v188.4" ] ],
     [ "relay1:VCC", "esp:5V", "red", [ "h-38.4", "v259.2", "h-115.2" ] ],
     [ "esp:5V", "relay4:VCC", "red", [ "h0" ] ],
+
     [ "relay2:GND", "esp:GND.2", "black", [ "h0" ] ],
     [ "relay1:GND", "esp:GND.2", "black", [ "h-48", "v38" ] ],
     [ "relay3:GND", "esp:GND.2", "black", [ "v-144.4", "h188.8" ] ],
     [ "relay4:GND", "esp:GND.2", "black", [ "v-182.8" ] ],
+
     [ "relay2:COM", "esp:5V", "gold", [ "h-33.2", "v144.6", "h201.6" ] ],
     [ "relay3:COM", "esp:5V", "gold", [ "h0" ] ],
     [ "relay1:COM", "esp:5V", "gold", [ "h49.2", "v209.8" ] ],
     [ "relay4:COM", "esp:5V", "gold", [ "h0" ] ],
+
     [ "relay1:NO", "r2:2", "magenta", [ "h1.2", "v36.6" ] ],
     [ "relay2:NO", "r1:1", "magenta", [ "h-14", "v58.6" ] ],
     [ "relay3:NO", "r4:1", "magenta", [ "h-4.4", "v-37.4" ] ],
     [ "relay4:NO", "r3:2", "magenta", [ "h30", "v-59.4" ] ],
+
     [ "r1:2", "led1:A", "magenta", [ "v0" ] ],
     [ "r2:1", "led2:A", "magenta", [ "v0" ] ],
     [ "r4:2", "led3:A", "magenta", [ "v0" ] ],
     [ "r3:1", "led4:A", "magenta", [ "v0" ] ],
+
     [ "led1:C", "esp:GND.1", "magenta", [ "v0", "h38", "v124.8" ] ],
     [ "led3:C", "esp:GND.1", "magenta", [ "v0" ] ],
     [ "led4:C", "esp:GND.3", "magenta", [ "v0", "h-9.2", "v-86.4" ] ],
